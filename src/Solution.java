@@ -6,8 +6,7 @@ public class Solution {
                     {10, 11, 16, 20},
                     {23, 30, 34, 50}};
         Solution t = new Solution();
-        System.out.println(t.searchMatrix(A,3));
-
+        System.out.println(t.searchMatrix(A,7));
     }
 
     /*
@@ -24,24 +23,29 @@ public class Solution {
         if(matrix[0] == null || matrix[0].length == 0){
             return false;
         }
-
         int row = matrix.length;
         int column = matrix[0].length;
         int start = 0;
         int end = row * column -1;
-
-        while(start <= end){
-            int mid = end - start /2 + start;
+        while(start +1 < end){
+            int mid = start + (end - start)/2;
             int midNum = matrix[mid/column][mid%column];
             if(midNum == target){
                 return true;
             }
             if(midNum < target){
-                start = mid + 1;
+                start = mid ;
             }
-            if(midNum > target){
-                end = mid - 1;
+            if(midNum > target) {
+                end = mid ;
             }
+        }
+
+        if(matrix[start/column][start%column] == target){
+            return true;
+        }
+        if(matrix[end/column][end%column] == target){
+            return true;
         }
         return false;
     }
